@@ -4,65 +4,311 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hedge - 安全简洁的密码管家</title>
+  <meta name="description" content="Hedge 密码管理器 - 零知识架构、本地加密、隐私可控。安全存储密码与两步验证码。">
+  <link rel="icon" type="image/png" href="/img/app-icon.png">
   <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f2f2f7;
+      --bg-tertiary: #e5e5ea;
+      --text: #1c1c1e;
+      --text-secondary: #666666;
+      --accent: #007aff;
+      --accent-hover: #0066d6;
+      --border: #e5e5ea;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1e;
+        --bg-secondary: #2c2c2e;
+        --bg-tertiary: #38383a;
+        --text: #ffffff;
+        --text-secondary: #ababab;
+        --border: #38383a;
+        --shadow: 0 4px 24px rgba(0,0,0,0.3);
+      }
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-    header { padding: 60px 0; text-align: center; }
-    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 10px; }
-    .tagline { font-size: 1.25rem; color: #666; margin-bottom: 30px; }
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin: 60px 0; }
-    .feature { text-align: center; padding: 30px; background: #f8f8f8; border-radius: 12px; }
-    .feature h3 { margin-bottom: 10px; font-size: 1.1rem; }
-    .feature p { color: #666; font-size: 0.9rem; }
-    .cta { text-align: center; margin: 40px 0; }
-    .cta a { display: inline-block; padding: 14px 32px; background: #007aff; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 500; }
-    .cta a:hover { background: #0066d6; }
-    nav { margin-top: 40px; text-align: center; }
-    nav a { margin: 0 15px; color: #666; text-decoration: none; font-size: 0.9rem; }
-    nav a:hover { color: #007aff; }
-    footer { text-align: center; padding: 40px 0; color: #999; font-size: 0.85rem; margin-top: 60px; border-top: 1px solid #eee; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-size: 1.5rem; font-weight: 600; color: var(--text); text-decoration: none; }
+    nav ul { display: flex; list-style: none; gap: 32px; }
+    nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+    .hero-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+    .hero h1 { font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .hero .tagline { font-size: 1.4rem; color: var(--text-secondary); margin-bottom: 40px; }
+    .download-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .download-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .download-btn.secondary {
+      background: var(--bg-secondary);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .download-btn.secondary:hover { background: var(--bg-tertiary); }
+
+    .screenshots { padding: 60px 0; overflow: hidden; }
+    .screenshots h2 { text-align: center; font-size: 2rem; font-weight: 600; margin-bottom: 40px; }
+    .screenshot-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 0 24px 24px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .screenshot-scroll::-webkit-scrollbar { height: 6px; }
+    .screenshot-scroll::-webkit-scrollbar-track { background: var(--bg-secondary); border-radius: 3px; }
+    .screenshot-scroll::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 3px; }
+    .screenshot-scroll img {
+      height: 540px;
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+      scroll-snap-align: center;
+      flex-shrink: 0;
+    }
+    .screenshot-scroll img.macos { height: 380px; }
+
+    .features { padding: 80px 0; }
+    .features h2 { text-align: center; font-size: 2rem; font-weight: 600; margin-bottom: 48px; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-2px); }
+    .feature-icon { font-size: 2rem; margin-bottom: 16px; }
+    .feature-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+    .feature-card p { color: var(--text-secondary); font-size: 0.95rem; }
+
+    .platforms { padding: 80px 0; text-align: center; }
+    .platforms h2 { font-size: 2rem; font-weight: 600; margin-bottom: 16px; }
+    .platforms > p { color: var(--text-secondary); margin-bottom: 32px; }
+    .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; max-width: 800px; margin: 0 auto; }
+    .platform-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .platform-card:hover { background: var(--bg-tertiary); transform: translateY(-2px); }
+    .platform-card h3 { font-size: 1.3rem; margin-bottom: 6px; }
+    .platform-card p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+
+    .cta-section {
+      text-align: center;
+      padding: 80px 0;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      margin: 40px 0;
+    }
+    .cta-section h2 { font-size: 2rem; font-weight: 600; margin-bottom: 16px; }
+    .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.1rem; }
+
+    footer {
+      text-align: center;
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    footer p { margin-bottom: 8px; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero .tagline { font-size: 1.1rem; }
+      .screenshot-scroll img { height: 400px; }
+      .screenshot-scroll img.macos { height: 280px; }
+      nav ul { gap: 20px; }
+      nav a { font-size: 0.85rem; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
+    <nav>
+      <a href="/" class="logo">Hedge</a>
+      <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="/support">支持</a></li>
+        <li><a href="/privacy">隐私政策</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <img src="/img/app-icon.png" alt="Hedge" class="hero-icon">
       <h1>Hedge</h1>
       <p class="tagline">安全简洁的密码管家</p>
-      <nav>
-        <a href="/">首页</a>
-        <a href="/support">支持</a>
-        <a href="/privacy">隐私政策</a>
-      </nav>
-    </header>
-
-    <main>
-      <div class="cta">
-        <a href="https://apps.apple.com/app/hedge" target="_blank">App Store 下载</a>
+      <div class="download-btns">
+        <a href="https://apps.apple.com/app/hedge" class="download-btn" target="_blank">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="https://github.com/HardyDou/hedge" class="download-btn secondary" target="_blank">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+          GitHub
+        </a>
       </div>
+    </section>
 
-      <div class="features">
-        <div class="feature">
-          <h3>🔒 零知识架构</h3>
-          <p>您的数据仅存储在本地，我们无法访问您的密码</p>
+    <section class="screenshots">
+      <h2>iPhone & iPad</h2>
+      <div class="screenshot-scroll">
+        <img src="/screenshots/hedge-ios-01.PNG" alt="Hedge iOS截图 1">
+        <img src="/screenshots/hedge-ios-02.PNG" alt="Hedge iOS截图 2">
+        <img src="/screenshots/hedge-ios-03.PNG" alt="Hedge iOS截图 3">
+        <img src="/screenshots/hedge-ios-04.PNG" alt="Hedge iOS截图 4">
+        <img src="/screenshots/hedge-ios-05.PNG" alt="Hedge iOS截图 5">
+      </div>
+    </section>
+
+    <section class="screenshots">
+      <h2>macOS</h2>
+      <div class="screenshot-scroll">
+        <img src="/screenshots/hedge-macos-01.png" alt="Hedge macOS截图 1" class="macos">
+        <img src="/screenshots/hedge-macos-02.png" alt="Hedge macOS截图 2" class="macos">
+        <img src="/screenshots/hedge-macos-03.png" alt="Hedge macOS截图 3" class="macos">
+        <img src="/screenshots/hedge-macos-04.png" alt="Hedge macOS截图 4" class="macos">
+        <img src="/screenshots/hedge-macos-05.png" alt="Hedge macOS截图 5" class="macos">
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>为什么选择 Hedge</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>零知识架构</h3>
+          <p>您的数据仅存储在本地设备或您自己的云存储中，我们无法访问您的密码。</p>
         </div>
-        <div class="feature">
-          <h3>🛡️ AES-256 加密</h3>
-          <p>军用级加密保护您的敏感信息</p>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>AES-256 加密</h3>
+          <p>军用级加密保护您的敏感信息，所有加密操作在本地完成。</p>
         </div>
-        <div class="feature">
-          <h3>☁️ 同步无忧</h3>
-          <p>支持 iCloud Drive、WebDAV，您掌控自己的数据</p>
+        <div class="feature-card">
+          <div class="feature-icon">☁️</div>
+          <h3>您掌控数据</h3>
+          <p>支持 iCloud Drive、WebDAV 同步。数据存储在您自己的云服务中。</p>
         </div>
-        <div class="feature">
-          <h3>🔐 密码 + 验证码</h3>
-          <p>安全存储密码与两步验证码</p>
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>密码 + 验证码</h3>
+          <p>安全存储密码与两步验证码，一站式管理您的登录凭据。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>跨平台支持</h3>
+          <p>支持 iOS、macOS 和 Android，数据无缝同步，随时随地访问。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌿</div>
+          <h3>开源可信</h3>
+          <p>代码完全公开，您可以自行验证安全性。隐私保护，透明可信。</p>
         </div>
       </div>
-    </main>
+    </section>
+
+    <section class="platforms">
+      <h2>支持平台</h2>
+      <p>覆盖您的所有设备，支持 CLI 终端操作</p>
+      <div class="platform-grid">
+        <a href="https://apps.apple.com/app/hedge" class="platform-card" target="_blank">
+          <h3>iOS</h3>
+          <p>iPhone & iPad</p>
+        </a>
+        <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank">
+          <h3>macOS</h3>
+          <p>Mac</p>
+        </a>
+        <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank">
+          <h3>Windows</h3>
+          <p>Windows</p>
+        </a>
+        <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank">
+          <h3>Linux</h3>
+          <p>Linux</p>
+        </a>
+        <a href="https://github.com/HardyDou/hedge-cli" class="platform-card" target="_blank">
+          <h3>CLI</h3>
+          <p>终端工具</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="platforms">
+      <h2>安装 CLI</h2>
+      <p>通过 Homebrew 一键安装</p>
+      <div class="platform-grid" style="max-width: 500px;">
+        <div class="platform-card">
+          <h3>brew install hedge-cli</h3>
+          <p>macOS / Linux / Windows</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>开始使用 Hedge</h2>
+      <p>您的密码，坚若磐石。</p>
+      <a href="https://apps.apple.com/app/hedge" class="download-btn" target="_blank">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store 下载
+      </a>
+    </section>
 
     <footer>
       <p>© 2026 Hedge. 您的密码，坚若磐石。</p>
+      <p><a href="mailto:doouxiaoyu@163.com">联系支持</a></p>
     </footer>
   </div>
 </body>

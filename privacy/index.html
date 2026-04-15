@@ -4,44 +4,80 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>隐私政策 - Hedge</title>
+  <link rel="icon" type="image/png" href="/img/app-icon.png">
   <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f2f2f7;
+      --bg-tertiary: #e5e5ea;
+      --text: #1c1c1e;
+      --text-secondary: #666666;
+      --accent: #007aff;
+      --border: #e5e5ea;
+      --radius: 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1e;
+        --bg-secondary: #2c2c2e;
+        --bg-tertiary: #38383a;
+        --text: #ffffff;
+        --text-secondary: #ababab;
+        --border: #38383a;
+      }
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.8; color: #333; }
-    .container { max-width: 700px; margin: 0 auto; padding: 0 20px; }
-    header { padding: 60px 0; }
-    h1 { font-size: 2rem; font-weight: 600; }
-    nav { margin-top: 20px; }
-    nav a { margin-right: 20px; color: #666; text-decoration: none; font-size: 0.9rem; }
-    nav a:hover { color: #007aff; }
-    .content { margin: 40px 0; }
-    .content h2 { font-size: 1.2rem; margin: 30px 0 15px; font-weight: 600; }
-    .content p { color: #555; margin-bottom: 15px; }
-    footer { text-align: center; padding: 40px 0; color: #999; font-size: 0.85rem; margin-top: 60px; border-top: 1px solid #eee; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+    .container { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .logo { font-size: 1.5rem; font-weight: 600; color: var(--text); text-decoration: none; }
+    nav ul { display: flex; list-style: none; gap: 32px; }
+    nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; }
+    nav a:hover, nav a.active { color: var(--accent); }
+    main { padding: 60px 0; }
+    h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+    h2 { font-size: 1.2rem; font-weight: 600; margin: 40px 0 16px; }
+    p { color: var(--text-secondary); margin-bottom: 16px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { text-align: center; padding: 48px 0; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem; }
+    .updated { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 40px; }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
+    <nav>
+      <a href="/" class="logo">Hedge</a>
+      <ul>
+        <li><a href="/">首页</a></li>
+        <li><a href="/support">支持</a></li>
+        <li><a href="/privacy" class="active">隐私政策</a></li>
+      </ul>
+    </nav>
+
+    <main>
       <h1>隐私政策</h1>
-      <nav>
-        <a href="/">首页</a>
-        <a href="/support">支持</a>
-        <a href="/privacy">隐私政策</a>
-      </nav>
-    </header>
-    <div class="content">
+      <p class="updated">最后更新：2026 年 4 月</p>
+
       <h2>数据存储</h2>
       <p>Hedge 采用零知识架构。您的密码和敏感数据仅存储在您自己的设备或您授权的云存储中（iCloud Drive、WebDAV）。我们无法访问您的任何数据。</p>
-      
+
       <h2>本地加密</h2>
       <p>所有加密操作均在您的设备本地完成。加密密钥仅存在于您的设备上，我们无法获取您的密钥或解密您的数据。</p>
-      
+
       <h2>第三方服务</h2>
-      <p>我们不会收集、存储或共享您的任何个人信息。</p>
-      
+      <p>我们不会收集、存储或共享您的任何个人信息。我们不与任何第三方广告商或分析服务商合作。</p>
+
+      <h2>数据安全</h2>
+      <p>Hedge 使用 AES-256-GCM 加密标准保护您的数据。所有加密和解密操作均在您的设备本地进行，确保您的敏感信息始终处于加密状态。</p>
+
+      <h2>您的权利</h2>
+      <p>由于我们不收集您的任何个人数据，您拥有对您数据的完全控制权。您可以随时删除本地数据或断开云同步。</p>
+
       <h2>联系我们</h2>
-      <p>如有任何问题，请联系：doouxiaoyu@163.com</p>
-    </div>
+      <p>如有任何问题，请联系：<a href="mailto:doouxiaoyu@163.com">doouxiaoyu@163.com</a></p>
+    </main>
+
     <footer>
       <p>© 2026 Hedge</p>
     </footer>
