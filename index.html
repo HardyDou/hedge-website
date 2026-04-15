@@ -9,76 +9,76 @@
   <style>
     :root {
       --bg: #ffffff;
-      --bg-secondary: #f2f2f7;
+      --bg-secondary: #f5f5f7;
       --bg-tertiary: #e5e5ea;
-      --text: #1c1c1e;
-      --text-secondary: #666666;
-      --accent: #007aff;
-      --accent-hover: #0066d6;
-      --border: #e5e5ea;
-      --radius: 16px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --text: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --border: #d2d2d7;
+      --radius: 20px;
+      --shadow: 0 12px 40px rgba(0,0,0,0.08);
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1c1c1e;
-        --bg-secondary: #2c2c2e;
-        --bg-tertiary: #38383a;
-        --text: #ffffff;
-        --text-secondary: #ababab;
+        --bg: #000000;
+        --bg-secondary: #1c1c1e;
+        --bg-tertiary: #2c2c2e;
+        --text: #f5f5f7;
+        --text-secondary: #a1a1a6;
         --border: #38383a;
-        --shadow: 0 4px 24px rgba(0,0,0,0.3);
+        --shadow: 0 12px 40px rgba(0,0,0,0.4);
       }
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
     }
-    .logo { font-size: 1.5rem; font-weight: 600; color: var(--text); text-decoration: none; }
-    nav ul { display: flex; list-style: none; gap: 32px; }
-    nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+    .logo { font-size: 1.75rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    nav ul { display: flex; list-style: none; gap: 40px; }
+    nav a { color: var(--text-secondary); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
     nav a:hover { color: var(--accent); }
 
+    /* Hero */
     .hero {
       text-align: center;
-      padding: 80px 0 60px;
+      padding: 100px 0 80px;
     }
     .hero-icon {
-      width: 120px;
-      height: 120px;
-      border-radius: 28px;
+      width: 140px;
+      height: 140px;
+      border-radius: 32px;
       box-shadow: var(--shadow);
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
-    .hero h1 { font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
-    .hero .tagline { font-size: 1.4rem; color: var(--text-secondary); margin-bottom: 40px; }
-    .download-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero h1 { font-size: 4rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .hero .tagline { font-size: 1.75rem; color: var(--text-secondary); margin-bottom: 48px; font-weight: 400; }
+    .download-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
     .download-btn {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
+      gap: 12px;
+      padding: 18px 36px;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 14px;
       font-weight: 500;
-      font-size: 1rem;
-      transition: background 0.2s, transform 0.2s;
+      font-size: 1.1rem;
+      transition: all 0.3s;
     }
-    .download-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .download-btn:hover { background: var(--accent-hover); transform: scale(1.02); }
     .download-btn.secondary {
       background: var(--bg-secondary);
       color: var(--text);
@@ -86,76 +86,141 @@
     }
     .download-btn.secondary:hover { background: var(--bg-tertiary); }
 
-    .screenshots { padding: 60px 0; overflow: hidden; }
-    .screenshots h2 { text-align: center; font-size: 2rem; font-weight: 600; margin-bottom: 40px; }
-    .screenshot-scroll {
+    /* Screenshots - Full width */
+    .screenshots-section {
+      padding: 80px 0;
+      background: var(--bg-secondary);
+    }
+    .screenshots-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .screenshots-section > p {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-size: 1.1rem;
+    }
+    .screenshot-viewport {
+      width: 100%;
+      overflow: hidden;
+    }
+    .screenshot-track {
       display: flex;
-      gap: 20px;
+      gap: 24px;
+      padding: 0 max(48px, calc((100vw - 1200px) / 2 + 48px));
       overflow-x: auto;
-      padding: 0 24px 24px;
       scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
     }
-    .screenshot-scroll::-webkit-scrollbar { height: 6px; }
-    .screenshot-scroll::-webkit-scrollbar-track { background: var(--bg-secondary); border-radius: 3px; }
-    .screenshot-scroll::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 3px; }
-    .screenshot-scroll img {
-      height: 540px;
-      border-radius: 36px;
+    .screenshot-track::-webkit-scrollbar { height: 8px; }
+    .screenshot-track::-webkit-scrollbar-track { background: transparent; }
+    .screenshot-track::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .screenshot-track img {
+      height: clamp(400px, 60vh, 600px);
+      border-radius: 40px;
       box-shadow: var(--shadow);
       scroll-snap-align: center;
       flex-shrink: 0;
+      object-fit: cover;
     }
-    .screenshot-scroll img.macos { height: 380px; }
+    .screenshot-track img.macos { height: clamp(280px, 40vh, 400px); }
+    .screenshot-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .screenshot-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+    }
 
-    .features { padding: 80px 0; }
-    .features h2 { text-align: center; font-size: 2rem; font-weight: 600; margin-bottom: 48px; }
+    /* Features */
+    .features { padding: 100px 0; }
+    .features h2 { text-align: center; font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .features > p { text-align: center; color: var(--text-secondary); margin-bottom: 64px; font-size: 1.1rem; }
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
     }
     .feature-card {
       background: var(--bg-secondary);
       border-radius: var(--radius);
-      padding: 32px;
-      transition: transform 0.2s;
+      padding: 40px;
+      transition: transform 0.3s;
     }
-    .feature-card:hover { transform: translateY(-2px); }
-    .feature-icon { font-size: 2rem; margin-bottom: 16px; }
-    .feature-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
-    .feature-card p { color: var(--text-secondary); font-size: 0.95rem; }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-icon { font-size: 2.5rem; margin-bottom: 20px; }
+    .feature-card h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 12px; }
+    .feature-card p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
 
-    .platforms { padding: 80px 0; text-align: center; }
-    .platforms h2 { font-size: 2rem; font-weight: 600; margin-bottom: 16px; }
-    .platforms > p { color: var(--text-secondary); margin-bottom: 32px; }
-    .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; max-width: 800px; margin: 0 auto; }
-    .platform-card {
+    /* Platforms */
+    .platforms-section {
+      padding: 100px 0;
       background: var(--bg-secondary);
+    }
+    .platforms-section h2 { text-align: center; font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .platforms-section > p { text-align: center; color: var(--text-secondary); margin-bottom: 64px; font-size: 1.1rem; }
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .platform-card {
+      background: var(--bg);
       border-radius: var(--radius);
-      padding: 28px 20px;
+      padding: 36px 24px;
       text-align: center;
       text-decoration: none;
       color: var(--text);
-      transition: transform 0.2s, background 0.2s;
+      transition: all 0.3s;
+      border: 1px solid var(--border);
     }
-    .platform-card:hover { background: var(--bg-tertiary); transform: translateY(-2px); }
-    .platform-card h3 { font-size: 1.3rem; margin-bottom: 6px; }
-    .platform-card p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+    .platform-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--accent); }
+    .platform-card h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 8px; }
+    .platform-card p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+    .platform-card .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; margin-top: 8px; }
 
+    /* CLI Section */
+    .cli-section { padding: 100px 0; text-align: center; }
+    .cli-section h2 { font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .cli-section > p { color: var(--text-secondary); margin-bottom: 48px; font-size: 1.1rem; }
+    .cli-install {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .cli-install code {
+      background: var(--bg-secondary);
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    /* CTA */
     .cta-section {
       text-align: center;
-      padding: 80px 0;
-      background: var(--bg-secondary);
-      border-radius: var(--radius);
-      margin: 40px 0;
+      padding: 120px 0;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg) 100%);
     }
-    .cta-section h2 { font-size: 2rem; font-weight: 600; margin-bottom: 16px; }
-    .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.1rem; }
+    .cta-section h2 { font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .cta-section p { color: var(--text-secondary); margin-bottom: 40px; font-size: 1.25rem; }
 
     footer {
       text-align: center;
-      padding: 48px 0;
+      padding: 60px 0;
       border-top: 1px solid var(--border);
       color: var(--text-secondary);
       font-size: 0.9rem;
@@ -164,13 +229,24 @@
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2.2rem; }
-      .hero .tagline { font-size: 1.1rem; }
-      .screenshot-scroll img { height: 400px; }
-      .screenshot-scroll img.macos { height: 280px; }
-      nav ul { gap: 20px; }
-      nav a { font-size: 0.85rem; }
+      .container { padding: 0 24px; }
+      .hero { padding: 60px 0 40px; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero .tagline { font-size: 1.25rem; }
+      .hero-icon { width: 100px; height: 100px; border-radius: 24px; }
+      .download-btn { padding: 14px 24px; font-size: 1rem; }
+      .screenshot-track { padding: 0 24px; gap: 16px; }
+      .screenshot-track img { height: 320px; border-radius: 28px; }
+      .screenshot-track img.macos { height: 220px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+      .cli-install code { padding: 12px 20px; font-size: 0.9rem; }
+      .cta-section h2 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -200,31 +276,40 @@
         </a>
       </div>
     </section>
+  </div>
 
-    <section class="screenshots">
-      <h2>iPhone & iPad</h2>
-      <div class="screenshot-scroll">
+  <section class="screenshots-section">
+    <h2>iPhone & iPad</h2>
+    <p>优雅的界面，安全的设计</p>
+    <div class="screenshot-viewport">
+      <div class="screenshot-track">
         <img src="./screenshots/hedge-ios-01.PNG" alt="Hedge iOS截图 1">
         <img src="./screenshots/hedge-ios-02.PNG" alt="Hedge iOS截图 2">
         <img src="./screenshots/hedge-ios-03.PNG" alt="Hedge iOS截图 3">
         <img src="./screenshots/hedge-ios-04.PNG" alt="Hedge iOS截图 4">
         <img src="./screenshots/hedge-ios-05.PNG" alt="Hedge iOS截图 5">
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="screenshots">
-      <h2>macOS</h2>
-      <div class="screenshot-scroll">
+  <section class="screenshots-section">
+    <h2>macOS</h2>
+    <p>原生的体验，强大的功能</p>
+    <div class="screenshot-viewport">
+      <div class="screenshot-track">
         <img src="./screenshots/hedge-macos-01.png" alt="Hedge macOS截图 1" class="macos">
         <img src="./screenshots/hedge-macos-02.png" alt="Hedge macOS截图 2" class="macos">
         <img src="./screenshots/hedge-macos-03.png" alt="Hedge macOS截图 3" class="macos">
         <img src="./screenshots/hedge-macos-04.png" alt="Hedge macOS截图 4" class="macos">
         <img src="./screenshots/hedge-macos-05.png" alt="Hedge macOS截图 5" class="macos">
       </div>
-    </section>
+    </div>
+  </section>
 
+  <div class="container">
     <section class="features">
       <h2>为什么选择 Hedge</h2>
+      <p>安全、简洁、可信 — 您的密码，坚若磐石</p>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🔒</div>
@@ -249,7 +334,7 @@
         <div class="feature-card">
           <div class="feature-icon">📱</div>
           <h3>跨平台支持</h3>
-          <p>支持 iOS、macOS 和 Android，数据无缝同步，随时随地访问。</p>
+          <p>支持 iOS、macOS、Android 和 Windows，数据无缝同步，随时随地访问。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🌿</div>
@@ -258,64 +343,43 @@
         </div>
       </div>
     </section>
+  </div>
 
-    <section class="platforms">
+  <section class="platforms-section">
+    <div class="container">
       <h2>支持平台</h2>
       <p>覆盖您的所有设备</p>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 700px; margin: 0 auto; text-align: left;">
-        <div>
-          <h3 style="font-size: 1.1rem; margin-bottom: 16px;">📱 移动端</h3>
-          <a href="https://apps.apple.com/app/hedge" class="platform-card" target="_blank" style="display: block; margin-bottom: 12px;">
-            <h3>iOS</h3>
-            <p>iPhone & iPad · App Store</p>
-          </a>
-          <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank" style="display: block; margin-bottom: 12px;">
-            <h3>Android</h3>
-            <p>即将到来 · Google Play</p>
-          </a>
-        </div>
-        <div>
-          <h3 style="font-size: 1.1rem; margin-bottom: 16px;">💻 桌面端</h3>
-          <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank" style="display: block; margin-bottom: 12px;">
-            <h3>macOS</h3>
-            <p>Mac</p>
-          </a>
-          <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank" style="display: block; margin-bottom: 12px;">
-            <h3>Windows</h3>
-            <p>Windows</p>
-          </a>
-          <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank" style="display: block; margin-bottom: 12px;">
-            <h3>Linux</h3>
-            <p>Linux</p>
-          </a>
-        </div>
-      </div>
-      <div style="margin-top: 40px;">
-        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">⌨️ 命令行</h3>
-        <a href="https://github.com/HardyDou/hedge" class="platform-card" target="_blank">
-          <h3>CLI</h3>
-          <p>AI Agent 使用 · macOS / Linux / Windows</p>
+      <div class="platforms-grid">
+        <a href="https://apps.apple.com/app/hedge" class="platform-card" target="_blank">
+          <h3>iOS</h3>
+          <p>iPhone & iPad</p>
+        </a>
+        <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank">
+          <h3>Android</h3>
+          <p>Google Play</p>
+        </a>
+        <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank">
+          <h3>macOS</h3>
+          <p>Mac</p>
+        </a>
+        <a href="https://github.com/HardyDou/hedge/releases" class="platform-card" target="_blank">
+          <h3>Windows</h3>
+          <p>Windows</p>
         </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="platforms">
-      <h2>安装 CLI</h2>
-      <div class="platform-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 700px; margin: 0 auto;">
-        <div class="platform-card">
-          <h3>macOS</h3>
-          <p>brew install hedge-cli</p>
-        </div>
-        <div class="platform-card">
-          <h3>Linux</h3>
-          <p>下载 Release 或编译</p>
-        </div>
-        <div class="platform-card">
-          <h3>Windows</h3>
-          <p>scoop install hedge-cli</p>
-        </div>
+  <div class="container">
+    <section class="cli-section">
+      <h2>CLI 终端工具</h2>
+      <p>为 AI Agent 设计，支持 macOS / Linux / Windows</p>
+      <div class="cli-install">
+        <code>brew install hedge-cli</code>
+        <code>scoop install hedge-cli</code>
+        <code>Download from GitHub</code>
       </div>
-      <p style="margin-top: 24px; font-size: 0.9rem;"><a href="https://github.com/HardyDou/hedge" target="_blank">查看安装说明 →</a></p>
+      <p><a href="https://github.com/HardyDou/hedge" target="_blank">查看安装说明 →</a></p>
     </section>
 
     <section class="cta-section">
@@ -326,11 +390,11 @@
         App Store 下载
       </a>
     </section>
-
-    <footer>
-      <p>© 2026 Hedge. 您的密码，坚若磐石。</p>
-      <p><a href="mailto:doouxiaoyu@163.com">联系支持</a></p>
-    </footer>
   </div>
+
+  <footer>
+    <p>© 2026 Hedge. 您的密码，坚若磐石。</p>
+    <p><a href="mailto:doouxiaoyu@163.com">联系支持</a></p>
+  </footer>
 </body>
 </html>
